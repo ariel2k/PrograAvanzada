@@ -1,0 +1,21 @@
+package personaPack;
+
+public class Persona {
+	
+	private String nombre, apellido;
+
+	public Persona(String nombre, String apellido){
+		this.nombre = new String(nombre);
+		this.apellido = new String(apellido);
+	}
+		
+	public String nombreCompleto(){
+		return nombre+" "+apellido;
+	}
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Persona p1 = new Persona("Ariel", "Molina");
+		System.out.println( p1.nombreCompleto() );
+	}
+}

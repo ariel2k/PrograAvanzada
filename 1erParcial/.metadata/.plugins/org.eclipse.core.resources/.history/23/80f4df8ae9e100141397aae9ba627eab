@@ -1,0 +1,63 @@
+package Math;
+
+public class MatrizMath {
+	
+	private int fila,
+				columna;
+	private double[][] mat;
+	
+	public MatrizMath(String ruta){
+		Archivo arch = new Archivo(ruta);
+		String linea = arch.leerArchivo();
+		String[] split = linea.split(" ");
+		this.fila = Integer.parseInt(split[0]);
+		this.columna = Integer.parseInt(split[1]);
+		int f,
+			c;
+		for(int i = 0; i<this.fila * this.columna; i++){
+			linea = arch.leerArchivo();
+			split = linea.split(" ");
+			f = Integer.parseInt(split[0]);
+			c = Integer.parseInt(split[1]);
+			mat[f][c] = Double.parseDouble(split[2]);
+		}
+	}
+	
+	public String toString() {
+		String cad = new String("Hola");
+		return cad;
+	}
+	
+	
+	public static void main(String[] args) {
+		MatrizMath mat1 = new MatrizMath("mat1.in");
+		MatrizMath mat2 = new MatrizMath("mat2.in");
+		System.out.println("mat1: \n" + mat1);
+		System.out.println("mat2: \n" + mat2);
+		/*
+		System.out.println("Suma: \n" + mat1.sumar(mat2));
+		System.out.println("Resta: \n" + mat1.restar(mat2));
+		
+		System.out.println("Producto: \n" + mat1.producto(mat2));
+		System.out.println("Producto por 3: \n" + mat1.producto(3));
+		
+		System.out.println("Norma Uno: " + mat1.normaUno());
+		System.out.println("Norma Dos: " + mat1.normaDos());
+		System.out.println("Norma Infinito: " + mat1.normaInfinito());
+		
+		MatrizMath mat3 = mat1.clone();
+		System.out.println("\nClonado de matriz 1: \n" + mat3);
+		
+		if(mat1.equals(mat3))
+			System.out.println("Matrices iguales");
+		else
+			System.out.println("Matrices distintos");
+		
+		if(mat1.equals(mat2))
+			System.out.println("Matrices iguales");
+		else
+			System.out.println("Matrices distintos");
+		*/
+	}
+
+}

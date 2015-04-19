@@ -1,0 +1,31 @@
+package fracc;
+
+public class Fraccion {
+
+	private long numerador,
+				 denominador;
+	
+	public Fraccion(long numerador, long denominador){
+		this.numerador = numerador;
+		this.denominador = denominador;
+	}
+	
+	public String toString(){
+		return numerador+"/"+denominador;
+	}
+	
+	public Fraccion multiplicar(Fraccion f){
+		return new Fraccion(this.numerador * f.numerador, this.denominador*f.denominador);
+	}
+	
+	public Fraccion dividir(Fraccion f){
+		return new Fraccion(this.numerador * f.denominador, this.denominador*f.numerador);
+	}
+	
+	public static void main(String[] args) {
+		Fraccion f1 = new Fraccion(1,5);
+		Fraccion f2 = new Fraccion(5,1);
+		System.out.println(f1.multiplicar(f2));
+	}
+
+}

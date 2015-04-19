@@ -1,0 +1,26 @@
+package personaPack;
+
+public class Persona {
+	
+	private String nombre, apellido;
+
+	public Persona(String nombre, String apellido){
+		this.nombre = new String(nombre);
+		this.apellido = new String(apellido);
+	}
+	
+	public String toString() {
+		return nombre1+" "+apellido1;
+	}	
+	
+	public void nombreComplejo(){
+		return this.toString();
+	}
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+
+}

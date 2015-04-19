@@ -1,0 +1,127 @@
+package palindromo;
+
+import java.awt.LinearGradientPaint;
+import java.io.*;
+
+public class PalinRes {
+	
+	private static boolean esPalindromo(String linea){
+		int posIni = 0,
+			posFin = linea.length()-1;
+		char inicio = linea.charAt(posIni),
+			 fin = linea.charAt(posFin);
+				
+		while(posIni <= posFin){
+			System.out.println("inicio: "+inicio+"  fin: "+fin);
+			if(inicio == fin){
+				posIni++;
+				posFin--;
+				inicio = linea.charAt(posIni);
+				fin = linea.charAt(posFin);
+			}else
+				return false;
+		}
+		
+		return true;
+	}
+	
+	private static boolean esIPalindromo(String linea){
+		return esPalindromo(linea.substring(1));
+	}
+	
+	private static boolean esDPalindromo(String linea){
+		return esPalindromo(linea.substring(0, linea.length() - 1));
+	}
+	
+	private static int casos(String linea){
+		int casos=0;
+		if(esPalindromo(linea))	 // caso 1 = 1
+			casos++;
+		if(esIPalindromo(linea)) // caso 2 = 2
+			casos+=2;
+		if(esDPalindromo(linea)) // caso 3 = 4
+			casos+=4;	
+		/* caso = 0 -> no es nada
+		 * caso = 1 -> es Palindromo
+		 * caso = 2 -> es i-palindromo
+		 * caso = 3 -> es Palindromo i-palindromo
+		 * caso = 4 -> es d-palindromo
+		 * caso = 5 -> es Palindromo d-palindromo
+		 * caso = 6 -> es i-palindromo d-palindromo
+		 * caso = 7 -> son los 3 casos
+		 * */
+		return casos;
+	}
+
+	public static void resolver(String cadena){
+		if(cadena.length() < 4)
+			System.out.println("No se puede");
+		else{
+			int[] vecCasos = new int[2],
+				  hayDistinguidas = 0;
+			String 	cad1 = new String(""),
+					cad2 = new String("");
+			int cota = 1;
+			while(cota < cadena.length() -1){
+				cad1 = cadena.substring(0, cota);
+				cad2 = cadena.substring(cota, cadena.length()-1);
+				vecCasos[0] = casos(cad1);
+				vecCasos[1] = casos(cad2);
+				if( vecCasos[0] != 0 && vecCasos[1] != 0 ){
+					hayDistinguidas = 1;
+					switch(vecCasos[0]){
+					case 0: break;
+					case 1: System.out.println();
+						break;
+					case 2: break;
+					case 3: break;
+					case 4: break;
+					case 5: break;
+					case 6: break;
+					case 7: break;
+					}		
+				}
+				
+				cota++;
+			}
+		}
+	}
+	
+	
+	public String abrirArchivo(String rutaArch){
+		File archivo = null;
+		FileReader fr = null;
+		BufferedReader br = null;
+		try {
+		  // Apertura del fichero y creacion de BufferedReader para poder
+		  // hacer una lectura comoda (disponer del metodo readLine()).
+		  archivo = new File (rutaArch);
+		  fr = new FileReader (archivo);
+		  br = new BufferedReader(fr);			  
+		  // Lectura del fichero
+		  String linea;
+		  if((linea=br.readLine())!=null)
+	    	   return linea;
+		 }
+	  catch(Exception e){
+	     e.printStackTrace();
+	  }finally{
+	     // En el finally cerramos el fichero, para asegurarnos
+	     // que se cierra tanto si todo va bien como si salta 
+	     // una excepcion.
+	     try{                    
+	        if( null != fr ){   
+	           fr.close();     
+	        }                  
+	     }catch (Exception e2){ 
+	        e2.printStackTrace();
+	     }
+	  }		
+		return null;
+	}
+	
+	public static void main(String[] args) {
+				
+	}
+
+}

@@ -1,0 +1,28 @@
+package Math;
+
+public class MatrizMath {
+	
+	private int fila,
+				columna;
+	private double[][] mat;
+	
+	public MatrizMath(String ruta){
+		Archivo arch = new Archivo(ruta);
+		String linea = arch.leerArchivo();
+		String[] split = linea.split(" ");
+		this.fila = Integer.parseInt(split[0]);
+		this.columna = Integer.parseInt(split[1]);
+		for(int i = 0; i<this.fila * this.columna; i++){
+			linea = arch.leerArchivo();
+			split = linea.split(" ");
+			mat[Integer.parseInt(split[0])][Integer.parseInt(split[1])] = Double.parseDouble(Integer.parseInt(split[3]));
+		}
+		
+	}
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

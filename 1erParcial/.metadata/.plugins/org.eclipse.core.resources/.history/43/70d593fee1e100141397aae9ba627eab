@@ -1,0 +1,83 @@
+package Math;
+
+public class VectorMath {
+
+	private int dimension;
+	private double[] vec;
+	
+	public VectorMath(String ruta) {
+		Archivo arch = new Archivo(ruta);
+		this.dimension = Integer.parseInt(arch.leerArchivo());
+		vec = new double[dimension];
+		for(int i=0; i<this.dimension; i++) {
+			vec[i] = Double.parseDouble(arch.leerArchivo());
+		}
+	}
+
+	public VectorMath(int dimension) {
+		this.dimension = dimension;
+		this.vec = new double[this.dimension];
+	}
+	
+	public VectorMath sumar(VectorMath v) throws DistDimException{
+		if (this.dimension != v.dimension)
+			throw new DistDimException(" Distinta Dimension ");
+		
+		VectorMath suma = new VectorMath(this.dimension);
+		for(int i=0; i<this.dimension; i++) {
+			suma.vec[i] = this.vec[i] + v.vec[i];
+		}
+		return suma;		
+	}
+	
+	public VectorMath restar(VectorMath v) throws DistDimException{
+		if (this.dimension != v.dimension)
+			throw new DistDimException(" Distinta Dimension ");
+		
+		VectorMath resta = new VectorMath(this.dimension);
+		for(int i=0; i<this.dimension; i++) {
+			resta.vec[i] = this.vec[i] - v.vec[i];
+		}
+		return resta;		
+	}
+	
+	public VectorMath producto(VectorMath v) throws DistDimException{
+		if (this.dimension != v.dimension)
+			throw new DistDimException(" Distinta Dimension ");
+		
+		VectorMath prod = new VectorMath(this.dimension);
+		for(int i=0; i<this.dimension; i++) {
+			prod.vec[i] = this.vec[i] * v.vec[i];
+		}
+		return prod;		
+	}
+	
+	public VectorMath producto(double n) {
+		VectorMath prodN = new VectorMath(this.dimension);
+		for(int i = 0; i<this.dimension; i++) {
+			prodN.vec[i] = this.vec[i] * n;
+		}
+		return prodN;
+	}
+	public String toString() {
+		String cad = new String("");
+		for(int i = 0; i < this.dimension; i++) {
+			cad +=  (i+1) + " [" + this.vec[i] + "]\n";
+		}
+		return cad;
+	}
+	
+	public static void main(String[] args) {
+		// Suma de vectores
+		// Resta de vectores
+		VectorMath vec1 = new VectorMath("vec1.in");
+		VectorMath vec2 = new VectorMath("vec2.in");
+		System.out.println("Vec1: \n" + vec1);
+		System.out.println("Vec2: \n" + vec2);
+		System.out.println("Suma: \n" + vec1.sumar(vec2));
+		System.out.println("Resta: \n" + vec1.restar(vec2));
+		System.out.println("Producto: \n" + vec1.producto(vec2));
+		System.out.println("Producto por 3: \n" + vec1.producto(3));
+	}
+
+}

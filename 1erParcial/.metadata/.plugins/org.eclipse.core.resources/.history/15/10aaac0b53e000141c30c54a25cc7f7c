@@ -1,0 +1,25 @@
+package personaPack;
+
+public class Persona {
+	
+	private String nombre, apellido;
+	//private int edad;
+	//private long DNI;
+
+	public Persona(String nombre, String apellido){
+		this.nombre = new String(nombre);
+		this.apellido = new String(apellido);
+	}
+	
+	
+	public String toString() {
+		return nombre1+" "+apellido1;
+	}	
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+
+}

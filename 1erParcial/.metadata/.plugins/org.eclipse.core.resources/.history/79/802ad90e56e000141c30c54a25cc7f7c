@@ -1,0 +1,12 @@
+package fracc;
+
+public class Fraccion {
+
+	private long num,
+				 denom;
+	
+	public static void main(String[] args) {
+		
+	}
+
+}

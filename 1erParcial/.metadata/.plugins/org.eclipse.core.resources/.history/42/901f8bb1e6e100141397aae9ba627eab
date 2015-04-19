@@ -1,0 +1,14 @@
+package Math;
+
+public class MatrizMath {
+	private int fila,
+				columna;
+	private double[][] mat;
+	
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

@@ -1,0 +1,12 @@
+package personaPack;
+
+public class Persona {
+	
+	private String nombre1, nombre2, apellido1, apellido2;
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

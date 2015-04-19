@@ -1,0 +1,17 @@
+package Math;
+
+public class VectorMath {
+
+	private int dimension;
+	private double[] vec;
+	
+	public VectorMath(int dimension){
+		this.dimension = dimension;
+		vec = new double[dimension];
+	}
+	
+	public static void main(String[] args) {
+	
+	}
+
+}
