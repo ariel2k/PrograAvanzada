@@ -4,41 +4,82 @@ public class MatrizMath {
 	
 	private int fila,
 				columna;
-	private double[][] mat;
+	private double mat[][];
 
-	public MatrizMath(int fila, int colum) {
-		this.fila = fila;
-		this.columna = colum;
-		this.mat = new double[fila][colum];
+	public MatrizMath(int fi, int co) {
+		this.fila = 0;
+		this.columna = 0;
+		this.mat = new double[fi][co];
 	}
 	
-	public MatrizMath(String ruta){
+	public MatrizMath(String ruta) {
 		Archivo arch = new Archivo(ruta);
 		String linea = arch.leerArchivo();
-		String[] split = linea.split(" ");
-		String[] contenido;
-		this.fila = Integer.parseInt(split[0]);
-		this.columna = Integer.parseInt(split[1]);
-		int f,
-			c;
-		double num;
-		this.mat = new double[this.fila][this.columna];
-		for(int i = 0; i<this.fila * this.columna; i++){
+		String[] splited = linea.split(" ");
+		String[] datos;
+		int fi = Integer.parseInt(splited[0]),
+			co = Integer.parseInt(splited[1]),
+			coordx,
+			coordy;		
+		this.fila = fi;
+		this.columna = co;
+		this.mat = new double[fi][co];
+		
+		for (int i = 1; i <= fi * co; i++) {
 			linea = arch.leerArchivo();
-			contenido = linea.split(" ");
-			f = Integer.parseInt(contenido[0]);
-			c = Integer.parseInt(contenido[1]);
-			num = Double.parseDouble(contenido[2]);
-			this.mat[f][c] = num;
+			datos = linea.split(" ");
+			coordx = Integer.parseInt(datos[0]);
+			coordy = Integer.parseInt(datos[1]);
+			this.mat[coordx][coordy] = Double.parseDouble(datos[2]);
+		}		
+	}
+
+	public MatrizMath sumar(MatrizMath matrizSum) throws DistDimException{
+		if (this.fila != matrizSum.fila && this.columna != matrizSum.columna)
+			throw new DistDimException(" Distinta Dimension ");
+		MatrizMath resultado = new MatrizMath(this.fila, this.columna);
+		resultado.fila = this.fila;
+		resultado.columna = this.columna;
+		for(int i = 0; i < this.fila; i++) {
+			for(int j = 0; j < this.columna; j++) {
+				resultado.mat[i][j] = this.mat[i][j] + matrizSum.mat[i][j];
+			}
 		}
+		return resultado;
 	}
 	
+	public MatrizMath restar(MatrizMath matrizRest) throws DistDimException {
+		if (this.fila != matrizRest.fila && this.columna != matrizRest.columna)
+			throw new DistDimException(" Distinta Dimension ");
+		MatrizMath resultado = new MatrizMath(this.fila, this.columna);
+		resultado.fila = this.fila;
+		resultado.columna = this.columna;
+		for(int i = 0; i < this.fila; i++) {
+			for(int j = 0; j < this.columna; j++) {
+				resultado.mat[i][j] = this.mat[i][j] - matrizRest.mat[i][j];
+			}
+		}
+		return resultado;
+	}
+	
+	public MatrizMath producto(MatrizMath matriz) throws DistDimException {
+		if(this.columna != matriz.fila)
+			throw new DistDimException(" Numero de columnas de la primera matriz, no coincide con el de columnas de la segunda  ");
+		MatrizMath resultado = new MatrizMath(this.fila, matriz.columna);
+		resultado.fila = this.fila;
+		resultado.columna = matriz.columna;
+		for(int i = 0; i < this.fila; i++)
+			for(int j = 0; j < matriz.columna; j++)
+				for(int ciclo = 0; ciclo < this.columna; ciclo++)
+					resultado.mat[i][j] += this.mat[i][ciclo] * matriz.mat[ciclo][j];
+		return resultado;
+	}
 	public String toString() {
 		String cad = new String("");
-		for(int i = 0; i<this.fila; i++) {
+		for (int i = 0; i < this.fila; i++) {
 			cad += "[";
-			for(int j = 0; j<this.columna; j++) {
-				if(this.mat[i][j] > 0)
+			for (int j = 0; j < this.columna; j++) {
+				if (this.mat[i][j] >= 0)
 					cad += " ";
 				cad += this.mat[i][j] + " ";
 			}
@@ -46,40 +87,23 @@ public class MatrizMath {
 		}
 		return cad;
 	}
-	
-	public MatrizMath sumar(MatrizMath mat) {
-		MatrizMath aux = new MatrizMath(this.fila, this.columna);
-	}
-	
+
 	public static void main(String[] args) {
 		MatrizMath mat1 = new MatrizMath("mat1.in");
 		MatrizMath mat2 = new MatrizMath("mat2.in");
-		System.out.println("mat1: \n" + mat1);
-		System.out.println("mat2: \n" + mat2);
-		/*
-		System.out.println("Suma: \n" + mat1.sumar(mat2));
-		System.out.println("Resta: \n" + mat1.restar(mat2));
-		
-		System.out.println("Producto: \n" + mat1.producto(mat2));
-		System.out.println("Producto por 3: \n" + mat1.producto(3));
-		
-		System.out.println("Norma Uno: " + mat1.normaUno());
-		System.out.println("Norma Dos: " + mat1.normaDos());
-		System.out.println("Norma Infinito: " + mat1.normaInfinito());
-		
-		MatrizMath mat3 = mat1.clone();
-		System.out.println("\nClonado de matriz 1: \n" + mat3);
-		
-		if(mat1.equals(mat3))
-			System.out.println("Matrices iguales");
-		else
-			System.out.println("Matrices distintos");
-		
-		if(mat1.equals(mat2))
-			System.out.println("Matrices iguales");
-		else
-			System.out.println("Matrices distintos");
-		*/
+		MatrizMath mat3 = new MatrizMath("mat3.in");
+		MatrizMath mat4 = new MatrizMath("mat4.in");
+		System.out.println("La matriz 1:\n" + mat1);
+		System.out.println("La matriz 2:\n" + mat2);
+		System.out.println("La matriz 3:\n" + mat3);
+		System.out.println("La matriz 4:\n" + mat4);
+		// Suma entre matrices
+		System.out.println("Mat1 + Mat1:\n" + mat1.sumar(mat1));
+		System.out.println("Mat1 + Mat2:\n" + mat1.sumar(mat2));
+		// Resta entre matrices
+		System.out.println("Mat1 - Mat1:\n" + mat1.restar(mat1));
+		System.out.println("Mat1 - Mat2:\n" + mat1.restar(mat2));
+		// Producto entre matrices
+		System.out.println("Mat3 * Mat4:\n" + mat3.producto(mat4));
 	}
-
 }
