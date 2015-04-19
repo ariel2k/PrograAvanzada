@@ -5,7 +5,7 @@ public class MatrizMath {
 	private int fila,
 				columna;
 	private double[][] mat;
-	
+
 	public MatrizMath(int fila, int colum) {
 		this.fila = fila;
 		this.columna = colum;
