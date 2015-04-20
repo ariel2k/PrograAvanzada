@@ -7,8 +7,8 @@ public class MatrizMath {
 	private double mat[][];
 
 	public MatrizMath(int fi, int co) {
-		this.fila = fi;
-		this.columna = co;
+		this.fila = 0;
+		this.columna = 0;
 		this.mat = new double[fi][co];
 	}
 	
@@ -34,22 +34,12 @@ public class MatrizMath {
 		}		
 	}
 
-	public int getFila() {
-		return fila;
-	}
-
-	public int getColumna() {
-		return columna;
-	}
-
-	public double[][] getMat() {
-		return mat;
-	}
-
 	public MatrizMath sumar(MatrizMath matrizSum) throws DistDimException{
 		if (this.fila != matrizSum.fila && this.columna != matrizSum.columna)
 			throw new DistDimException(" Distinta Dimension ");
 		MatrizMath resultado = new MatrizMath(this.fila, this.columna);
+		resultado.fila = this.fila;
+		resultado.columna = this.columna;
 		for(int i = 0; i < this.fila; i++) {
 			for(int j = 0; j < this.columna; j++) {
 				resultado.mat[i][j] = this.mat[i][j] + matrizSum.mat[i][j];
@@ -62,6 +52,8 @@ public class MatrizMath {
 		if (this.fila != matrizRest.fila && this.columna != matrizRest.columna)
 			throw new DistDimException(" Distinta Dimension ");
 		MatrizMath resultado = new MatrizMath(this.fila, this.columna);
+		resultado.fila = this.fila;
+		resultado.columna = this.columna;
 		for(int i = 0; i < this.fila; i++) {
 			for(int j = 0; j < this.columna; j++) {
 				resultado.mat[i][j] = this.mat[i][j] - matrizRest.mat[i][j];
@@ -74,6 +66,8 @@ public class MatrizMath {
 		if(this.columna != matriz.fila)
 			throw new DistDimException(" Numero de columnas de la primera matriz, no coincide con el de columnas de la segunda  ");
 		MatrizMath resultado = new MatrizMath(this.fila, matriz.columna);
+		resultado.fila = this.fila;
+		resultado.columna = matriz.columna;
 		for(int i = 0; i < this.fila; i++)
 			for(int j = 0; j < matriz.columna; j++)
 				for(int ciclo = 0; ciclo < this.columna; ciclo++)
@@ -83,22 +77,15 @@ public class MatrizMath {
 	
 	public MatrizMath producto(float n) {
 		MatrizMath resultado = new MatrizMath(this.fila, this.columna);
+		resultado.fila = this.fila;
+		resultado.columna = this.columna;
 		for (int i = 0; i < this.fila; i++)
 			for (int j = 0; j < this.columna; j++)
 				resultado.mat[i][j] = n * this.mat[i][j];
 		return resultado;
 	}
 
-	public MatrizMath producto(VectorMath vec) throws DistDimException {
-		if(this.columna != vec.getDimension())
-			throw new DistDimException(" Numero de columnas distinta a la dimension del vector");
-		
-		MatrizMath resultado = new MatrizMath (this.fila, 1);
-		for(int i = 0; i < this.fila; i++)
-			for(int j = 0; j < vec.getDimension(); j++)
-					resultado.mat[i][0] += this.mat[i][j] * vec.getVec()[j];
-		return resultado;
-	}
+	public MatrizMath producto(VectorMath v) 
 	
 	public String toString() {
 		String cad = new String("");
@@ -115,11 +102,10 @@ public class MatrizMath {
 	}
 
 	public static void main(String[] args) {
-		/*
-		 * 
 		MatrizMath mat1 = new MatrizMath("mat1.in");
 		MatrizMath mat2 = new MatrizMath("mat2.in");
 		MatrizMath mat3 = new MatrizMath("mat3.in");
+		MatrizMath mat4 = new MatrizMath("mat4.in");
 		System.out.println("La matriz 1:\n" + mat1);
 		System.out.println("La matriz 2:\n" + mat2);
 		System.out.println("La matriz 3:\n" + mat3);
@@ -136,13 +122,5 @@ public class MatrizMath {
 		// Producto con float
 		System.out.println("La matriz 1:\n" + mat1);
 		System.out.println("Mat1 * 2.53:\n" + mat1.producto(2.53f));
-		 */
-		
-		MatrizMath mat4 = new MatrizMath("mat4.in");
-		VectorMath vec2 = new VectorMath("vec2.in");
-		System.out.println(mat4);
-		System.out.println(vec2);
-		// Producto matriz vector
-		System.out.println("Producto matriz vector: \n"+mat4.producto(vec2));
 	}
 }

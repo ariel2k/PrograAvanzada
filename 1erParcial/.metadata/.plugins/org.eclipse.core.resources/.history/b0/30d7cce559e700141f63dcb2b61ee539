@@ -34,18 +34,6 @@ public class MatrizMath {
 		}		
 	}
 
-	public int getFila() {
-		return fila;
-	}
-
-	public int getColumna() {
-		return columna;
-	}
-
-	public double[][] getMat() {
-		return mat;
-	}
-
 	public MatrizMath sumar(MatrizMath matrizSum) throws DistDimException{
 		if (this.fila != matrizSum.fila && this.columna != matrizSum.columna)
 			throw new DistDimException(" Distinta Dimension ");
@@ -96,7 +84,8 @@ public class MatrizMath {
 		MatrizMath resultado = new MatrizMath (this.fila, 1);
 		for(int i = 0; i < this.fila; i++)
 			for(int j = 0; j < vec.getDimension(); j++)
-					resultado.mat[i][0] += this.mat[i][j] * vec.getVec()[j];
+				for(int ciclo = 0; ciclo < this.columna; ciclo++)
+					resultado.mat[i][j] += this.mat[i][ciclo] * vec.getVec()[j];
 		return resultado;
 	}
 	
@@ -115,11 +104,11 @@ public class MatrizMath {
 	}
 
 	public static void main(String[] args) {
-		/*
-		 * 
 		MatrizMath mat1 = new MatrizMath("mat1.in");
 		MatrizMath mat2 = new MatrizMath("mat2.in");
 		MatrizMath mat3 = new MatrizMath("mat3.in");
+		MatrizMath mat4 = new MatrizMath("mat4.in");
+		VectorMath vec2 = new VectorMath("vec2.in");
 		System.out.println("La matriz 1:\n" + mat1);
 		System.out.println("La matriz 2:\n" + mat2);
 		System.out.println("La matriz 3:\n" + mat3);
@@ -136,13 +125,8 @@ public class MatrizMath {
 		// Producto con float
 		System.out.println("La matriz 1:\n" + mat1);
 		System.out.println("Mat1 * 2.53:\n" + mat1.producto(2.53f));
-		 */
 		
-		MatrizMath mat4 = new MatrizMath("mat4.in");
-		VectorMath vec2 = new VectorMath("vec2.in");
-		System.out.println(mat4);
-		System.out.println(vec2);
 		// Producto matriz vector
-		System.out.println("Producto matriz vector: \n"+mat4.producto(vec2));
+		MatrizMath
 	}
 }

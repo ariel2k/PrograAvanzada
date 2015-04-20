@@ -92,15 +92,12 @@ public class VectorMath {
 		}
 		return prodN;
 	}
-	
-		
 	private double modulo(double num) {
 		if(num >= 0)
 			return num;
 		else
 			return -num;
 	}
-	
 	public double normaUno() {
 		double cont = 0;
 		for(int i = 0; i<this.dimension; i++) {
@@ -137,6 +134,7 @@ public class VectorMath {
 	public static void main(String[] args) {
 		/*
 		 * 
+		VectorMath vec1 = new VectorMath("vec1.in");
 		VectorMath vec2 = new VectorMath("vec2.in");
 		System.out.println("Vec1: \n" + vec1);
 		System.out.println("Vec2: \n" + vec2);
@@ -164,12 +162,7 @@ public class VectorMath {
 		else
 			System.out.println("Vectores distintos");
 		 */
-		MatrizMath mat4 = new MatrizMath("mat4.in");
-		VectorMath vec2 = new VectorMath("vec2.in");
-		System.out.println(mat4);
-		System.out.println(vec2);
-		// Producto matriz vector
-		//System.out.println("Vector por matriz: \n"+vec2.producto(mat4));
+		Vetor
 	}
 
 }

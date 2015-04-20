@@ -34,18 +34,6 @@ public class MatrizMath {
 		}		
 	}
 
-	public int getFila() {
-		return fila;
-	}
-
-	public int getColumna() {
-		return columna;
-	}
-
-	public double[][] getMat() {
-		return mat;
-	}
-
 	public MatrizMath sumar(MatrizMath matrizSum) throws DistDimException{
 		if (this.fila != matrizSum.fila && this.columna != matrizSum.columna)
 			throw new DistDimException(" Distinta Dimension ");
@@ -96,7 +84,8 @@ public class MatrizMath {
 		MatrizMath resultado = new MatrizMath (this.fila, 1);
 		for(int i = 0; i < this.fila; i++)
 			for(int j = 0; j < vec.getDimension(); j++)
-					resultado.mat[i][0] += this.mat[i][j] * vec.getVec()[j];
+				for(int ciclo = 0; ciclo < this.columna; ciclo++)
+					resultado.mat[i][j] += this.mat[i][ciclo] * vec.getVec()[j];
 		return resultado;
 	}
 	

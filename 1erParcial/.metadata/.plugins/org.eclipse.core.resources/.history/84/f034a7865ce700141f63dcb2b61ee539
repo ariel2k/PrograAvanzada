@@ -34,18 +34,6 @@ public class MatrizMath {
 		}		
 	}
 
-	public int getFila() {
-		return fila;
-	}
-
-	public int getColumna() {
-		return columna;
-	}
-
-	public double[][] getMat() {
-		return mat;
-	}
-
 	public MatrizMath sumar(MatrizMath matrizSum) throws DistDimException{
 		if (this.fila != matrizSum.fila && this.columna != matrizSum.columna)
 			throw new DistDimException(" Distinta Dimension ");
