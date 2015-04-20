@@ -1,7 +1,0 @@
-package luch;
-
-public class Luchadroes {
-	public static void main(String[] args){
-		
-	}
-}
