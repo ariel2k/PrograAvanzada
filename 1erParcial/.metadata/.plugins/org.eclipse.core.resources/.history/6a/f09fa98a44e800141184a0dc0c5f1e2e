@@ -17,7 +17,8 @@ public class VectorMath {
 	}
 	
 	public int getDimension() {
-		return dimension;
+		return dimensio
+				n;
 	}
 
 	public double[] getVec() {

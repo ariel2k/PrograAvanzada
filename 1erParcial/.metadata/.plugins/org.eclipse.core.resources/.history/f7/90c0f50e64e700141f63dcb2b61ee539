@@ -17,7 +17,8 @@ public class VectorMath {
 	}
 	
 	public int getDimension() {
-		return dimension;
+		return dimensio
+				n;
 	}
 
 	public double[] getVec() {
@@ -91,15 +92,12 @@ public class VectorMath {
 		}
 		return prodN;
 	}
-	
-		
 	private double modulo(double num) {
 		if(num >= 0)
 			return num;
 		else
 			return -num;
 	}
-	
 	public double normaUno() {
 		double cont = 0;
 		for(int i = 0; i<this.dimension; i++) {
