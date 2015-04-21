@@ -113,7 +113,57 @@ public class MatrizMath {
 		}
 		return cad;
 	}
-
+	
+	public MatrizMath subMatriz(int filaASacar, int columnaASacar) {
+		int dim = this.fila-1;
+		MatrizMath m = new MatrizMath (dim, dim); 
+		int	fila=0,
+			colum=0,
+			bandera;
+		for(int i=0; i<this.fila; i++) {
+			bandera =0;
+			for(int j=0; j<this.fila; j++)
+				if(i != filaASacar && j!= columnaASacar) {
+					m.mat[fila][colum] = this.mat[i][j];
+					colum++;
+					bandera=1;
+				}
+			if(bandera == 1)
+				fila++;
+			colum=0;		
+		}
+		return m;
+	}
+	
+	public double determinante() throws DistDimException {
+		  if (this.columna != this.fila)
+		   throw new DistDimException(" No es una matriz cuadrada ");
+		  int dim = this.columna;
+		  if(dim == 2)
+		   return(this.mat[0][0] * this.mat[1][1] - this.mat[0][1] * this.mat[1][0]);
+		  else {
+		   // Si no es de 2 * 2
+		   double det = 0;
+		   MatrizMath subMat = new MatrizMath(dim - 1, dim - 1);
+		   for(int k = 0; k < dim; k++) 
+		    for(int i = 1; i < dim; i++) 
+		     for(int j = 0, z = 0; j < dim; j++) { 
+		      if(j != k) {
+		       subMat.mat[i-1][z] = this.mat[i][j];
+		       z++;
+		      }		    
+		    int m;
+		    if(k % 2 == 0)
+		     m = 1;
+		    else
+		     m = -1;
+		    det += this.mat[0][k] * subMat.determinante() * m;
+		   }
+		   return det;
+		  }  
+		 }
+	
+	
 	public static void main(String[] args) {
 		/*
 		 * 
@@ -136,13 +186,16 @@ public class MatrizMath {
 		// Producto con float
 		System.out.println("La matriz 1:\n" + mat1);
 		System.out.println("Mat1 * 2.53:\n" + mat1.producto(2.53f));
-		 */
 		
-		MatrizMath mat4 = new MatrizMath("mat4.in");
 		VectorMath vec2 = new VectorMath("vec2.in");
 		System.out.println(mat4);
 		System.out.println(vec2);
 		// Producto matriz vector
 		System.out.println("Producto matriz vector: \n"+mat4.producto(vec2));
+		 */
+		MatrizMath mat4 = new MatrizMath("mat4.in");
+		System.out.println(mat4);
+		//System.out.println(mat4.subMatriz(1, 3));
+		System.out.println(mat4.determinante());
 	}
 }
