@@ -117,31 +117,51 @@ public class MatrizMath {
 	public MatrizMath subMatriz(int filaASacar, int columnaASacar) {
 		int dim = this.fila-1;
 		MatrizMath m = new MatrizMath (dim, dim); 
-		
-		int filaThis=0,
-			fila=0,
-			columThis,
-			colum;
-		
-		while(fila < dim){		
-			columThis = 0;
-			colum = 0;
-			while(colum < dim) {
-				if(filaThis != filaASacar && columThis != columnaASacar) {
-					m.mat[fila][colum] = this.mat[filaThis][columThis];
-					columThis++;
+		int	fila=0,
+			colum=0,
+			bandera;
+		for(int i=0; i<this.fila; i++) {
+			bandera =0;
+			for(int j=0; j<this.fila; j++)
+				if(i != filaASacar && j!= columnaASacar) {
+					m.mat[fila][colum] = this.mat[i][j];
 					colum++;
-				} else {
-					columThis++;
+					bandera=1;
 				}
-			}
-			fila++;
-			filaThis++;				
+			if(bandera == 1)
+				fila++;
+			colum=0;		
 		}
-		
-		System.out.println(m);
 		return m;
 	}
+	
+	public double determinante() throws DistDimException {
+		  if (this.columna != this.fila)
+		   throw new DistDimException(" No es una matriz cuadrada ");
+		  int dim = this.columna;
+		  if(dim == 2)
+		   return(this.mat[0][0] * this.mat[1][1] - this.mat[0][1] * this.mat[1][0]);
+		  else {
+		   // Si no es de 2 * 2
+		   double det = 0;
+		   MatrizMath subMat = new MatrizMath(dim - 1, dim - 1);
+		   for(int k = 0; k < dim; k++) 
+		    for(int i = 1; i < dim; i++) 
+		     for(int j = 0, z = 0; j < dim; j++) { 
+		      if(j != k) {
+		       subMat.mat[i-1][z] = this.mat[i][j];
+		       z++;
+		      }		    
+		    int m;
+		    if(k % 2 == 0)
+		     m = 1;
+		    else
+		     m = -1;
+		    det += this.mat[0][k] * subMat.determinante() * m;
+		   }
+		   return det;
+		  }  
+		 }
 	
 	
 	public static void main(String[] args) {
@@ -175,6 +195,7 @@ public class MatrizMath {
 		 */
 		MatrizMath mat4 = new MatrizMath("mat4.in");
 		System.out.println(mat4);
-		mat4.subMatriz(1, 1);
+		//System.out.println(mat4.subMatriz(1, 3));
+		System.out.println(mat4.determinante());
 	}
 }

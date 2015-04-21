@@ -152,16 +152,16 @@ public class MatrizMath {
 		       subMat.mat[i-1][z] = this.mat[i][j];
 		       z++;
 		      }		    
-		    int m;
-		    if(k % 2 == 0)
-		     m = 1;
-		    else
-		     m = -1;
+		   int m;
+		   if(k % 2 == 0)
+		    m = 1;
+		   else
+		    m = -1;
 		    det += this.mat[0][k] * subMat.determinante() * m;
 		   }
 		   return det;
 		  }  
-		 }
+	}
 	
 	
 	public static void main(String[] args) {
