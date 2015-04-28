@@ -3,15 +3,18 @@ package Math;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 
 public class Archivo {
 	
+	//Leer
 	private File archivo;
     private FileReader fr;
     private BufferedReader br;
-   
+    
     //Region Constructor
-    Archivo(String path){
+    public Archivo(String path){
     	try {
 	       archivo = new File (path);
 	       fr = new FileReader (archivo);
@@ -33,9 +36,8 @@ public class Archivo {
 	       e.printStackTrace();
 	    }
 	    return null;  
-    }   
-
-    //Region Cerrar
+    }
+        //Region Cerrar
     public void cerrarArchivo(){
     	try{                    
 	         if( null != fr ){   
@@ -44,5 +46,6 @@ public class Archivo {
 	       }catch (Exception e2){ 
 	          e2.printStackTrace();
 	       }
-    }
+    }  
+    
 }

@@ -18,11 +18,14 @@ public class Ordenar {
 		Random rnd = new Random();
 			try
 	        {
-	            fichero = new FileWriter("D:\\Ariel\\Instituciones\\Unlam\\1113-Programacion-Avanzada\\workspace\\1erParcial\\TP1-H_Clinicas\\ordenados.out");
+				int matriz = 15;
+	            fichero = new FileWriter("mat15x15.in");
 	            pw = new PrintWriter(fichero);
-
-	            for (int i = 1; i < 80000; i++) {
-	            	pw.println(rnd.nextInt(40000));
+	            
+	            pw.println(matriz+" "+matriz);
+	            for (int i = 0; i <matriz; i++) {
+	            	for(int j=0; j<matriz; j++)
+	            	pw.println(i+" "+j+" ");
 	            }
 	        } catch (Exception e) {
 	            e.printStackTrace();

@@ -23,6 +23,10 @@ public class VectorMath {
 	public double[] getVec() {
 		return vec;
 	}
+	
+	public void setVec(double[] vec) {
+		this.vec = vec;
+	}
 
 	public VectorMath(int dimension) {
 		this.dimension = dimension;

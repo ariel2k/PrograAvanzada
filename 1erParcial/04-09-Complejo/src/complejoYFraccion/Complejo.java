@@ -1,8 +1,14 @@
 package complejoYFraccion;
 
-public class Complejo {
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Random;
 
-	private double real, img;
+public class Complejo implements Comparable<Complejo>{
+
+	private double  real,
+					img;
 	
 	public Complejo(){
 		real = 0;
@@ -13,7 +19,11 @@ public class Complejo {
 		this.real = real;
 		this.img = img;
 	}
-		
+	
+	public int compareTo(Complejo c) { 
+		return (int) (this.modulo() - c.modulo());
+	}
+	
 	public String toString(){
 		return this.real+" + "+this.img+"i";
 	}
@@ -54,6 +64,7 @@ public class Complejo {
 	public double modulo(){
 		return Math.sqrt(this.real*this.real + this.img*this.img);
 	}
+	
 	public boolean equals(Object obj){
 		if (this == obj)
 			return true;
@@ -70,9 +81,45 @@ public class Complejo {
 	}
 
 	public static void main(String[] args){
-		// TODO Auto-generated method stub
-		Complejo c1 = new Complejo(3, 1);
-		//Complejo c2 = new Complejo(1,-2);
-		System.out.println(c1.modulo());
+		/*
+		Random rnd = new Random();
+		double c1,
+			   c2;
+		Complejo aux;
+		int cant=10;
+		Complejo[] c = new Complejo[cant];
+		for(int i=0; i<cant; i++) {
+			aux = new Complejo(10-i,10-i);
+			c[i] = aux;
+		}
+		
+		for(int i=0; i<cant; i++)
+			System.out.println(c[i]);
+		
+		System.out.println("-------------------------");
+				
+		Arrays.sort(c);
+		
+		for(int i=0; i<cant; i++)
+			System.out.println(c[i]);
+		 */
+
+		ArrayList<Complejo> lc = new ArrayList<Complejo>();
+		Complejo aux;
+		int cant=10;
+		for(int i=0; i<cant; i++) {
+			aux = new Complejo(10-i,10-i);
+			lc.add(aux);
+		}
+		
+		for(Complejo o : lc)
+			System.out.println(o);
+		
+		System.out.println("-------------------------");
+				
+		Collections.sort(lc);
+		
+		for(Complejo o : lc)
+			System.out.println(o);
 	}
 }

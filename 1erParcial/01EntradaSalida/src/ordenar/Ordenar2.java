@@ -19,7 +19,7 @@ public class Ordenar2 {
 		String nombre = new String("Pkf");
 			try
 	        {
-	            fichero = new FileWriter("D:\\Ariel\\Instituciones\\Unlam\\1113-Programacion-Avanzada\\workspace\\1erParcial\\TP1-H_Clinicas\\ordenados_1.out");
+	            fichero = new FileWriter("lala.in");
 	            pw = new PrintWriter(fichero);
 
 	            for (int i = 1; i < 2000; i++) {

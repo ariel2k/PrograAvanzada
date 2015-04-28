@@ -1,4 +1,8 @@
+
 package Math;
+
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 public class MatrizMath {
 	
@@ -6,6 +10,11 @@ public class MatrizMath {
 				columna;
 	private double mat[][];
 
+	public MatrizMath(int dim) {
+		this.fila = dim;
+		this.columna = dim;
+		this.mat = new double[dim][dim]; 
+	}
 	public MatrizMath(int fi, int co) {
 		this.fila = fi;
 		this.columna = co;
@@ -45,7 +54,10 @@ public class MatrizMath {
 	public double[][] getMat() {
 		return mat;
 	}
-
+	
+	public void setMat(double[][] mat) {
+		this.mat = mat;
+	}
 	public MatrizMath sumar(MatrizMath matrizSum) throws DistDimException{
 		if (this.fila != matrizSum.fila && this.columna != matrizSum.columna)
 			throw new DistDimException(" Distinta Dimension ");
@@ -89,14 +101,15 @@ public class MatrizMath {
 		return resultado;
 	}
 
-	public MatrizMath producto(VectorMath vec) throws DistDimException {
+	public VectorMath producto(VectorMath vec) throws DistDimException {
 		if(this.columna != vec.getDimension())
-			throw new DistDimException(" Numero de columnas distinta a la dimension del vector");
-		
-		MatrizMath resultado = new MatrizMath (this.fila, 1);
+			throw new DistDimException(" Numero de columnas distinta a la dimension del vector");	
+		VectorMath resultado = new VectorMath (this.fila);
+		double a[] = new double[this.fila];
 		for(int i = 0; i < this.fila; i++)
 			for(int j = 0; j < vec.getDimension(); j++)
-					resultado.mat[i][0] += this.mat[i][j] * vec.getVec()[j];
+					a[i] += this.mat[i][j] * vec.getVec()[j];
+		resultado.setVec(a);
 		return resultado;
 	}
 	
@@ -162,6 +175,108 @@ public class MatrizMath {
 		   return det;
 		  }  
 	}
+
+	public void identidad() {
+		for (int i=0, j=0; i<this.fila; i++, j++)
+			this.mat[i][j] = 1;
+	} 
+
+	public void intercambiarCero(int fila) {
+		for(int i = fila + 1; i < this.fila; i++)
+			if(this.mat[i][fila] != 0)
+				this.intercambiar(i, fila);
+	}
+
+
+	public void intercambiar(int filaOrigen, int filaDestino) {
+		double aux;
+		for(int i=0; i<this.fila; i++) {
+			aux = this.mat[filaDestino][i];
+			this.mat[filaDestino][i] = this.mat[filaOrigen][i];
+			this.mat[filaOrigen][i] = aux;
+		}
+	}
+
+	public void sumarFilas(int filaOrigen, int filaDestino) {
+		for(int i=0; i<this.fila; i++)
+			this.mat[filaDestino][i] += this.mat[filaOrigen][i];
+	}
+	
+	public void sumarFilas(double n, int filaDestino) {
+		for(int i=0; i<this.fila; i++)
+			this.mat[filaDestino][i] += n;
+	}
+	
+	public void sumarFilas(int filaOrigen, int filaDestino, double n) {
+		for(int i=0; i<this.fila; i++)
+			this.mat[filaDestino][i] += this.mat[filaOrigen][i]*n;	
+	}
+
+	public void restarFilas(int filaOrigen, int filaDestino) {
+		for(int i=0; i<this.fila; i++)
+			this.mat[filaDestino][i] -= this.mat[filaOrigen][i];
+	}
+
+	public void multiplicarFilas(int filaOrigen, int filaDestino) {
+		for(int i=0; i<this.fila; i++)
+			this.mat[filaDestino][i] *= this.mat[filaOrigen][i];
+	}
+
+	public void multiplicarFilas(double n, int filaDestino) {
+		for(int i=0; i<this.fila; i++)
+			this.mat[filaDestino][i] *= n;
+	}
+
+	public void dividirFilas(int filaOrigen, int filaDestino) {
+		for(int i=0; i<this.fila; i++)
+			this.mat[filaDestino][i] /= this.mat[filaOrigen][i];
+	}
+
+	public void dividirFilas(double n, int filaDestino) {
+		for(int i=0; i<this.fila; i++)
+			this.mat[filaDestino][i] /= n;
+	}
+	
+	public boolean filaCero(int fila) {
+		for(int i=0; i<this.fila; i++)
+			if(this.mat[fila][i] != 0)
+				return false;
+		
+		return true;
+	}
+	
+	public MatrizMath inversa() {
+		int dimension = this.fila;
+		MatrizMath inversa = new MatrizMath (dimension, dimension);
+		inversa.identidad();
+		double aux;
+		//Triangular Abajo Diagonal
+		for(int i = 0; i < dimension; i++) {
+			if(this.mat[i][i] == 0) { //Si es cero lo intercambia por otra fila
+				if(this.filaCero(i))
+					return null;
+				this.intercambiarCero(i);
+			}
+			aux = this.mat[i][i]; //obtiene el valor de la diagonal
+			this.dividirFilas(aux, i); //divide toda la fila por ese valor para poner un 1 en la diagonal
+			inversa.dividirFilas(aux, i); //idem pero con la matriz inversa
+			
+			for(int j = i+1; j < dimension; j++) { 
+				double numFilaCol = (-1)*this.mat[j][i];
+				this.sumarFilas(i, j, numFilaCol); //multiplica todas las filas por su negativo restantes para ponerlas en cero
+				inversa.sumarFilas(i, j, numFilaCol);
+			}			
+		}	
+		//Triangular Arriba Diagonal
+		for(int i = dimension-1; i > 0; i--) {
+			for(int j=i-1; j >= 0 ; j--) { 
+				double numFilaCol = (-1)*this.mat[j][i];
+				this.sumarFilas(i, j, numFilaCol); //multiplica todas las filas por su negativo restantes para ponerlas en cero
+				inversa.sumarFilas(i, j, numFilaCol);
+			}
+		}			
+		return inversa;
+	}
 	
 	
 	public static void main(String[] args) {
@@ -192,10 +307,39 @@ public class MatrizMath {
 		System.out.println(vec2);
 		// Producto matriz vector
 		System.out.println("Producto matriz vector: \n"+mat4.producto(vec2));
-		 */
 		MatrizMath mat4 = new MatrizMath("mat4.in");
 		System.out.println(mat4);
 		//System.out.println(mat4.subMatriz(1, 3));
 		System.out.println(mat4.determinante());
+
+		//Identidad, suma y resta
+		MatrizMath iden = new MatrizMath(4,4);
+		iden.identidad();
+		System.out.println(iden);
+		
+		iden.sumarFilas(0,1);
+		System.out.println(iden);
+
+		iden.restarFilas(2,1);
+		System.out.println(iden);
+
+		//Intercambio
+		iden.intercambiar(3,1);
+		System.out.println(iden);
+		iden.intercambiarCero(1);
+		System.out.println(iden);
+
+		MatrizMath mat15 = new MatrizMath("mat15x15.in");
+		System.out.println(mat15);
+		System.out.println(mat15.determinante());
+		 */
+		//System.out.println(mat15.inversa());
+		MatrizMath mat4 = new MatrizMath("mat4.in");
+		System.out.println(mat4);
+		Calendar tIni = new GregorianCalendar();
+		System.out.println(mat4.inversa());
+		Calendar tFin = new GregorianCalendar();
+		double diff = tFin.getTimeInMillis() - tIni.getTimeInMillis();
+		System.out.println(diff);
 	}
 }
