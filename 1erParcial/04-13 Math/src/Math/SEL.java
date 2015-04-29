@@ -69,7 +69,7 @@ public class SEL {
 		MatrizMath resultado;
 		identidad.identidad();
 		resultado = identidad.restar(a.producto(aInv)); //Identidad original - identidad que da entre las matrices a y a^-1
-		cotaDeError = resultado.normaDos();
+		cotaDeError = resultado	.normaDos();
 		if(cotaDeError < 1E-10)
 			cotaDeError = 0;
 		datosSolucion += "\n"+cotaDeError+"\n";
@@ -80,7 +80,7 @@ public class SEL {
 	}
 	
 	public static void main(String[] args) {
-		SEL sel1 = new SEL("SEL1.in");
+		SEL sel1 = new SEL("SEL_3.in");
 		sel1.resolver();
 		sel1.cotaDeError();
 		sel1.guardar("Respuesta.out");
