@@ -278,6 +278,45 @@ public class MatrizMath {
 		return inversa;
 	}
 	
+	public double normaUno() {
+		VectorMath 	sumaColumna = new VectorMath(this.columna); 
+		double[] vec = new double[this.columna];
+		double cont;
+		for(int i = 0; i<this.columna; i++) {
+			cont = 0;
+			for(int j=0; j<this.fila; j++)
+				cont += Math.abs(this.mat[j][i]);	
+			vec[i] = cont;
+		}
+		sumaColumna.setVec(vec);
+		return sumaColumna.normaInfinito();		
+	}
+
+	
+	public double normaDos() {
+		double max=0;
+		for(int i = 0; i<this.fila; i++) {
+			for(int j=0; j<this.columna; j++)
+				if(Math.abs(this.mat[i][j]) > max)
+					max = Math.abs(this.mat[i][j]);
+		}
+		return max;
+	}
+	
+	public double normaInfinito() {
+		VectorMath 	sumaFila = new VectorMath(this.fila); 
+		double[] vec = new double[this.fila];
+		double cont;
+		for(int i = 0; i<this.fila; i++) {
+			cont = 0;
+			for(int j=0; j<this.columna; j++)
+				cont += Math.abs(this.mat[i][j]);
+			vec[i] = cont;
+		}
+		sumaFila.setVec(vec);
+		return sumaFila.normaInfinito();
+	}
+	
 	
 	public static void main(String[] args) {
 		/*
@@ -332,7 +371,6 @@ public class MatrizMath {
 		MatrizMath mat15 = new MatrizMath("mat15x15.in");
 		System.out.println(mat15);
 		System.out.println(mat15.determinante());
-		 */
 		//System.out.println(mat15.inversa());
 		MatrizMath mat4 = new MatrizMath("mat4.in");
 		System.out.println(mat4);
@@ -341,5 +379,12 @@ public class MatrizMath {
 		Calendar tFin = new GregorianCalendar();
 		double diff = tFin.getTimeInMillis() - tIni.getTimeInMillis();
 		System.out.println(diff);
+		 */
+		
+		MatrizMath mat2 = new MatrizMath("mat2.in");
+		System.out.println(mat2);
+		System.out.println("normaUno: "+mat2.normaUno());
+		System.out.println("normaInfinito: "+mat2.normaInfinito());
+		System.out.println("normaDos: "+mat2.normaDos());
 	}
 }

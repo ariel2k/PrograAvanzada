@@ -3,19 +3,19 @@ package Math;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 
-public class GrabarAchivo {
+public class GrabarArchivo {
 
     //Escribir
     private FileWriter fichero;
     private PrintWriter pw;
 
-	public GrabarAchivo(String path, String[] linea) {
+	public GrabarArchivo(String path, String[] linea) {
     	try
         {
     		int i = 0;
             this.fichero = new FileWriter(path);
             this.pw = new PrintWriter(fichero);
-            while(linea != null) {
+            while(i < linea.length) {
             	this.pw.println(linea[i]);
             	System.out.println(linea[i]);
             	i++;

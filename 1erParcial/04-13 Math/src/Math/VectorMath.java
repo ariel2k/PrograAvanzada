@@ -132,7 +132,7 @@ public class VectorMath {
 	public String toString() {
 		String cad = new String("");
 		for(int i = 0; i < this.dimension; i++) {
-			cad +=  (i+1) + " [" + this.vec[i] + "]\n";
+			cad +="[ " + this.vec[i] + "]\n";
 		}
 		return cad;
 	}

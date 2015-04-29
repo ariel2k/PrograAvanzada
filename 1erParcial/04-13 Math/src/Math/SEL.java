@@ -5,6 +5,7 @@ public class SEL {
 	private VectorMath b;
 	private MatrizMath a;
 	private VectorMath x;
+	private String[] datosSolucion;
 	
 	public SEL(String ruta) {
 		//abre archivo y lee la primera lina
@@ -42,23 +43,30 @@ public class SEL {
 	public void resolver() {
 		MatrizMath aInv;
 		aInv = a.inversa();
+		datosSolucion = new String[this.b.getVec().length + 1];
 		if (aInv == null)
-			System.out.println("Sistema incompatible");
+			this.datosSolucion[0] = "0";
 		else {
 			System.out.println(aInv);
 			this.x = aInv.producto(this.b);
-			System.out.println(this.x);
+			this.datosSolucion[0] = "" + this.x.getVec().length;
+			for(int i = 1; i < this.x.getVec().length + 1; i++)
+				this.datosSolucion[i] = "" + this.x.getVec()[i-1];
 		}
+	}
+	
+	public void guardar(String ruta) {
+		if(Integer.parseInt(datosSolucion[0]) == 0) {
+			this.datosSolucion = new String[1];
+			this.datosSolucion[0] = "La solución no es finita ni única";
+		}
+		GrabarArchivo guar = new GrabarArchivo(ruta, datosSolucion);
 	}
 	 
 	
 	public static void main(String[] args) {
-		//SEL sel1 = new SEL("SEL1.in");
-		//sel1.resolver();
-		String datos[] = {"Hola",
-						  "A",
-						  "R"};
-		GrabarAchivo prueba = new GrabarAchivo("SoyUnArchivoDePrueba_2.out",datos);
-	
+		SEL sel1 = new SEL("SEL1.in");
+		sel1.resolver();
+		sel1.guardar("Respuesta.out");
 	}
 }
