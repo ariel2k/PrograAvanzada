@@ -9,14 +9,17 @@ public class GrabarArchivo {
     private FileWriter fichero;
     private PrintWriter pw;
 
-	public GrabarArchivo(String path, String linea) {
+	public GrabarArchivo(String path, String[] linea) {
     	try
         {
     		int i = 0;
             this.fichero = new FileWriter(path);
             this.pw = new PrintWriter(fichero);
-            this.pw.println(linea);
-            System.out.println(linea);
+            while(i < linea.length) {
+            	this.pw.println(linea[i]);
+            	System.out.println(linea[i]);
+            	i++;
+            }
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

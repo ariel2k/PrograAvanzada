@@ -5,9 +5,7 @@ public class SEL {
 	private VectorMath b;
 	private MatrizMath a;
 	private VectorMath x;
-	private MatrizMath aInv;
-	private String datosSolucion = new String("");
-	private double cotaDeError;
+	private String[] datosSolucion;
 	
 	public SEL(String ruta) {
 		//abre archivo y lee la primera lina
@@ -43,39 +41,37 @@ public class SEL {
 	}
 	
 	public void resolver() {
+		MatrizMath aInv;
 		aInv = a.inversa();
+		datosSolucion = new String[this.b.getVec().length + 1];
 		if (aInv == null)
-			this.datosSolucion = "0";
+			this.datosSolucion[0] = "0";
 		else {
 			System.out.println(aInv);
 			this.x = aInv.producto(this.b);
-			this.datosSolucion += "" + this.x.getVec().length +"\n";
+			this.datosSolucion[0] = "" + this.x.getVec().length;
 			for(int i = 1; i < this.x.getVec().length + 1; i++)
-				this.datosSolucion += "" + this.x.getVec()[i-1] +"\n";
+				this.datosSolucion[i] = "" + this.x.getVec()[i-1];
 		}
 	}
 	
 	public void guardar(String ruta) {
-		if(datosSolucion.equals("0")) {
-			this.datosSolucion = "La solución no es finita ni única";
+		if(Integer.parseInt(datosSolucion[0]) == 0) {
+			this.datosSolucion = new String[1];
+			this.datosSolucion[0] = "La solución no es finita ni única";
 		}
 		GrabarArchivo guar = new GrabarArchivo(ruta, datosSolucion);
 	}
 	 
-	public void cotaDeError() {
-		int dim = a.getColumna();
-		MatrizMath identidad = new MatrizMath(dim);
-		MatrizMath resultado;
+	public double cotaDeError() {
+		MatrizMath identidad = MatrizMath(a.getFila());
 		identidad.identidad();
-		resultado = identidad.restar(a.producto(aInv)); //Identidad original - identidad que da entre las matrices a y a^-1
-		cotaDeError = resultado.normaDos();
-		datosSolucion += "\n"+cotaDeError+"\n";
+		
 	}
 	
 	public static void main(String[] args) {
 		SEL sel1 = new SEL("SEL1.in");
 		sel1.resolver();
-		sel1.cotaDeError();
 		sel1.guardar("Respuesta.out");
 	}
 }

@@ -15,7 +15,6 @@ public class MatrizMath {
 		this.columna = dim;
 		this.mat = new double[dim][dim]; 
 	}
-	
 	public MatrizMath(int fi, int co) {
 		this.fila = fi;
 		this.columna = co;

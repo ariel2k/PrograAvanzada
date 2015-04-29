@@ -56,7 +56,7 @@ public class SEL {
 	}
 	
 	public void guardar(String ruta) {
-		if(datosSolucion.equals("0")) {
+		if(Integer.parseInt(datosSolucion) == 0) {
 			this.datosSolucion = "La solución no es finita ni única";
 		}
 		GrabarArchivo guar = new GrabarArchivo(ruta, datosSolucion);
@@ -69,7 +69,7 @@ public class SEL {
 		identidad.identidad();
 		resultado = identidad.restar(a.producto(aInv)); //Identidad original - identidad que da entre las matrices a y a^-1
 		cotaDeError = resultado.normaDos();
-		datosSolucion += "\n"+cotaDeError+"\n";
+		linea += "\n"+cotaDeError+"\n";
 	}
 	
 	public static void main(String[] args) {

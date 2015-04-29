@@ -56,7 +56,7 @@ public class SEL {
 	}
 	
 	public void guardar(String ruta) {
-		if(datosSolucion.equals("0")) {
+		if(Integer.parseInt(datosSolucion) == 0) {
 			this.datosSolucion = "La solución no es finita ni única";
 		}
 		GrabarArchivo guar = new GrabarArchivo(ruta, datosSolucion);
