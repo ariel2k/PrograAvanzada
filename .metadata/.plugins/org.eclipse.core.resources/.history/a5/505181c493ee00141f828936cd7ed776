@@ -45,7 +45,9 @@ public class SEL {
 	}
 	
 	public void resolver() {
-		aInv =  a.inversa();
+		aInv = new MatrizMath ( a.inversa() );
+		System.out.println("A: "+a); 
+		System.out.println("aInv: "+aInv);
 		if (aInv == null)
 			this.datosSolucion = "0";
 		else {
@@ -81,6 +83,7 @@ public class SEL {
 		SEL sel1 = new SEL("SEL1.in");
 		sel1.resolver();
 		sel1.cotaDeError();
-		sel1.guardar("Respuesta.out");
+		//System.out.println(sel1);
+		//sel1.guardar("Respuesta.out");
 	}
 }

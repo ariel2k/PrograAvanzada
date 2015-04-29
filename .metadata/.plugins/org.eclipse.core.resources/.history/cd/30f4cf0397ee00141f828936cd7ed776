@@ -71,6 +71,10 @@ public class SEL {
 		resultado = identidad.restar(a.producto(aInv)); //Identidad original - identidad que da entre las matrices a y a^-1
 		cotaDeError = resultado.normaDos();
 		datosSolucion += "\n"+cotaDeError+"\n";
+		if(cotaDeError < 2)
+			System.out.println("Cota de error correcta");
+		else
+			System.out.println("Cota de error incorrecta");
 	}
 	
 	public String toString() {

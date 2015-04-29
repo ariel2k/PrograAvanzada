@@ -25,13 +25,11 @@ public class MatrizMath implements Cloneable{
 	public MatrizMath(int fi, int co, double[][] mat) {
 		this.fila = fi;
 		this.columna = co;
-		double[][] auxMat = new double[fi][co];
-		for (int i = 0; i < fi; i++) {
+		for (int i = 0; i <fi ; i++) {
 			for (int j = 0; j < co; j++) {
-				auxMat[i][j] = mat[i][j];
+				this.mat[i][j] = mat[i][j];
 			}
 		}
-		this.setMat(auxMat);
 	}
 	
 	public MatrizMath(String ruta) {

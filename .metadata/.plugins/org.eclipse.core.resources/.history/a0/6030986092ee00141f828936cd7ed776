@@ -4,11 +4,18 @@ package Math;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-public class MatrizMath implements Cloneable{
+public class MatrizMath {
 	
 	private int fila,
 				columna;
 	private double mat[][];
+
+	public MatrizMath(MatrizMath m) {
+		this.fila = m.fila;
+		this.columna = m.columna;
+		this.mat = new double[m.fila][m.columna]; 
+		this.setMat(m.getMat());
+	}
 	
 	public MatrizMath(int dim) {
 		this.fila = dim;
@@ -20,18 +27,6 @@ public class MatrizMath implements Cloneable{
 		this.fila = fi;
 		this.columna = co;
 		this.mat = new double[fi][co];
-	}
-	
-	public MatrizMath(int fi, int co, double[][] mat) {
-		this.fila = fi;
-		this.columna = co;
-		double[][] auxMat = new double[fi][co];
-		for (int i = 0; i < fi; i++) {
-			for (int j = 0; j < co; j++) {
-				auxMat[i][j] = mat[i][j];
-			}
-		}
-		this.setMat(auxMat);
 	}
 	
 	public MatrizMath(String ruta) {
@@ -261,7 +256,7 @@ public class MatrizMath implements Cloneable{
 	public MatrizMath inversa() {
 		int dimension = this.fila;
 		MatrizMath inversa = new MatrizMath (dimension, dimension);
-		MatrizMath copiaThis = new MatrizMath (dimension, dimension, this.getMat());
+		MatrizMath copiaThis = this;
 		inversa.identidad();
 		double aux;
 		//Triangular Abajo Diagonal
