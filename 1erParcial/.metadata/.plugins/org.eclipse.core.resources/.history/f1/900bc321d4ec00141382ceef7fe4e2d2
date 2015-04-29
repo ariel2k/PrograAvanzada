@@ -1,0 +1,11 @@
+import org.junit.Assert;
+import org.junit.Test;
+
+public class CalculadoraTest {
+	
+	@Test
+	public void queSumaDosEnterosPositivos() {
+		Calculadora calc = new Calculadora();
+		Assert.assertArrayEquals(3, calc.sumar(1, 2));
+	}
+}

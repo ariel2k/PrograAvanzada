@@ -1,0 +1,38 @@
+package calculadora;
+import org.junit.Assert;
+import org.junit.Test;
+
+public class CalculadoraTest {
+	
+	//si quiero darle un tiempo @Test(timeout=30)
+	@Test
+	public void queSumaDosEnterosPositivos() {
+		Calculadora calc = new Calculadora();
+		Assert.assertEquals(3, calc.sumar(1, 2));
+	}
+
+	//Espero que de una excepction del tipo Runtime
+	@Test(expected = RuntimeException.class)
+	public void queNoSumeDosEnterosPositivos() {
+		Calculadora calc = new Calculadora();
+		calc.sumar(-1,2);
+	}
+
+	@Test
+	public void queSumaDosFlotantesPositivos() {
+		Calculadora calc = new Calculadora();
+		Assert.assertEquals(3, calc.sumar(1, 2.), 0);
+	}	
+	
+	public void DividirDosFlotantes() {
+		Calculadora calc = new Calculadora();
+		Assert.assertEquals(1, calc.dividir(2, 2));
+	}
+	
+	
+	@Test
+	public void sumaConMemoria() {
+		Calculadora calc = new Calculadora();
+		Assert.assertEquals(4, calc.sumar(1, calc.sumar(1, 2)));		
+	}
+}

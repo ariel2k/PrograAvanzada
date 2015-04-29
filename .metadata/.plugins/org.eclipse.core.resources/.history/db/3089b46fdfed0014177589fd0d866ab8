@@ -1,0 +1,7 @@
+package MathFede;
+
+public class SEL {
+	VectorMath b = new VectorMath(0);
+	VectorMath x = new VectorMath(0);
+	MatrizMath a = new MatrizMath(3, 3);
+}

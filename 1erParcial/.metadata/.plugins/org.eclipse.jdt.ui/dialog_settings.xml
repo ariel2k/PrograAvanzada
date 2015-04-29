@@ -64,6 +64,9 @@
 	</section>
 	<section name="RenameInformationPopup">
 	</section>
+	<section name="ClasspathContainerSelectionPage">
+		<item value="1" key="index"/>
+	</section>
 	<section name="nls_accessor_history">
 		<section name="0">
 			<item value="Messages" key="accessorName"/>
@@ -73,7 +76,7 @@
 		</section>
 	</section>
 	<section name="BuildPathsPropertyPage">
-		<item value="3" key="pageIndex"/>
+		<item value="2" key="pageIndex"/>
 	</section>
 	<section name="quick_assist_proposal_size">
 	</section>

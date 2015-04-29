@@ -1,0 +1,23 @@
+import org.junit.Assert;
+import org.junit.Test;
+
+public class CalculadoraTest {
+	
+	@Test
+	public void queSumaDosEnterosPositivos() {
+		Calculadora calc = new Calculadora();
+		Assert.assertEquals(3, calc.sumar(1, 2));
+	}
+
+	@Test(expected = RuntimeException.class)
+	public void queNoSumeDosEnterosPositivos() {
+		Calculadora calc = new Calculadora();
+		calc.sumar(-1,2);
+	}
+
+	@Test
+	public void queSumaDosFlotantesPositivos() {
+		Calculadora calc = new Calculadora();
+		Assert.assertEquals(3, calc.sumar(1., 2.), 0);
+	}	
+}

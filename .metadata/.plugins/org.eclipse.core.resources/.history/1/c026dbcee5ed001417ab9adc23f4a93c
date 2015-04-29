@@ -1,0 +1,60 @@
+package Math;
+
+import java.io.FileWriter;
+import java.io.PrintWriter;
+
+public class GrabarAchivo {
+
+    //Escribir
+    private FileWriter fichero;
+    private PrintWriter pw;
+
+	public GrabarAchivo(String path) {
+    	try
+        {
+            this.fichero = new FileWriter(path);
+            this.pw = new PrintWriter(fichero);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+        	try {
+ 	           // Nuevamente aprovechamos el finally para 
+ 	           // asegurarnos que se cierra el fichero.
+ 	           if (null != fichero)
+ 	              fichero.close();
+ 	           } catch (Exception e2) {
+ 	              e2.printStackTrace();
+ 	           }
+        }
+    }
+    
+    public void grabarArchivo(String linea) {
+    	try
+        {
+    		this.pw.println(linea);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+        	try {
+ 	           // Nuevamente aprovechamos el finally para 
+ 	           // asegurarnos que se cierra el fichero.
+ 	           if (null != fichero)
+ 	              fichero.close();
+ 	           } catch (Exception e2) {
+ 	              e2.printStackTrace();
+ 	           }
+        }
+
+    }
+
+    public void cerrarArchivo(){
+    	try{                    
+    		if( null != fr ){   
+    			fr.close();    
+    		}                  
+    	}catch (Exception e2){ 
+    		e2.printStackTrace();
+    	}
+    }
+
+}

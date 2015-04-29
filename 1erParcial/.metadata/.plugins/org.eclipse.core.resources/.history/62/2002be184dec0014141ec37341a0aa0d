@@ -1,0 +1,32 @@
+package Math;
+
+import java.io.*;
+
+public class GeneradorMatriz {
+
+	public static void main(String[] args) {
+		FileWriter fichero = null;
+	    PrintWriter pw = null;
+		try
+        {
+			System.out.println("asd");
+			int matriz = 15;
+            fichero = new FileWriter("mat15x15.in");
+            pw = new PrintWriter(fichero);
+            
+            pw.println(matriz+" "+matriz);
+            for (int i = 0; i <matriz; i++) {
+            	for(int j=0; j<matriz; j++) {
+            		pw.println(i+" "+j);
+            	}
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+           
+        }
+				
+		
+	}
+
+}
