@@ -17,7 +17,6 @@ public class SEL {
 		//Crea el SEL inicializado
 		b = new VectorMath(dimension);
 		a = new MatrizMath(dimension);
-		aInv = new MatrizMath(dimension);
 		
 		//Llena A
 		String linea;
@@ -33,7 +32,7 @@ public class SEL {
 			auxA[coordx][coordy] = Double.parseDouble(datos[2]);
 		}
 		a.setMat(auxA);
-		
+		System.out.println("A: "+a+"\n");
 		
 		//Llena B
 		double auxB[] = new double[dimension];
@@ -46,7 +45,6 @@ public class SEL {
 	
 	public void resolver() {
 		aInv = a.inversa();
-		System.out.println("A: "+a+"\n");
 		if (aInv == null)
 			this.datosSolucion = "0";
 		else {

@@ -12,7 +12,7 @@ public class MatrizMath {
 
 	public MatrizMath(MatrizMath m) {
 		this.fila = m.fila;
-		this.columna = m.columna;
+		this.columna = m.columa;
 		this.mat = new double[m.fila][m.columna]; 
 	}
 	

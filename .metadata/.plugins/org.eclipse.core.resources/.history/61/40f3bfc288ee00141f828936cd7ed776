@@ -10,12 +10,6 @@ public class MatrizMath {
 				columna;
 	private double mat[][];
 
-	public MatrizMath(MatrizMath m) {
-		this.fila = m.fila;
-		this.columna = m.columna;
-		this.mat = new double[m.fila][m.columna]; 
-	}
-	
 	public MatrizMath(int dim) {
 		this.fila = dim;
 		this.columna = dim;

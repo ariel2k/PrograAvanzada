@@ -17,7 +17,6 @@ public class SEL {
 		//Crea el SEL inicializado
 		b = new VectorMath(dimension);
 		a = new MatrizMath(dimension);
-		aInv = new MatrizMath(dimension);
 		
 		//Llena A
 		String linea;
