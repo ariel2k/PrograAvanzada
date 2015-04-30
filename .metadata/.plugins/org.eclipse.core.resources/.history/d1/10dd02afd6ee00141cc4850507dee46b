@@ -195,13 +195,12 @@ public class MatrizMath implements Cloneable{
 	} 
 
 	public int intercambiarCero(int fila) {
-		int i=fila+1;
+		int i=fila;
 		while(i<this.fila){
 			if(this.mat[i][fila] != 0){
 				this.intercambiar(i, fila);
 				return i;
 			}	
-			i++;
 		}
 		return 0;
 	}
@@ -275,8 +274,7 @@ public class MatrizMath implements Cloneable{
 			if(copiaThis.mat[i][i] == 0) { //Si es cero lo intercambia por otra fila
 				if(copiaThis.filaCero(i))
 					return null;
-				int auxFila = copiaThis.intercambiarCero(i);
-				inversa.intercambiar(i, auxFila);
+				copiaThis.intercambiarCero(i);
 			}
 			aux = copiaThis.mat[i][i]; //obtiene el valor de la diagonal
 			copiaThis.dividirFilas(aux, i); //divide toda la fila por ese valor para poner un 1 en la diagonal

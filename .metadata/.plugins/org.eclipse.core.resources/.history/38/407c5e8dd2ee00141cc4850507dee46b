@@ -80,7 +80,7 @@ public class SEL {
 	}
 	
 	public String toString() {
-		return a+""+x+"=\n"+b+aInv;
+		return a+""+x+"=\n"+b;
 	}
 	
 	public static void main(String[] args) {
@@ -121,7 +121,6 @@ public class SEL {
 		SEL sel1 = new SEL("Entrada//03_4x4_Normal.in");
 		if(sel1.resolver());
 			sel1.cotaDeError();
-		System.out.println(sel1);
 		sel1.guardar("Respuesta.out");
 	}
 }

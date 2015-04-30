@@ -80,11 +80,10 @@ public class SEL {
 	}
 	
 	public String toString() {
-		return a+""+x+"=\n"+b+aInv;
+		return a+""+x+"=\n"+b;
 	}
 	
 	public static void main(String[] args) {
-		/*
 		String[] archivosIn = {"3",
 							   "5",
 							   "10",
@@ -117,11 +116,9 @@ public class SEL {
 			double diff = tFin.getTimeInMillis() - tIni.getTimeInMillis();
 			System.out.println(archivosIn[i]+"_Long: "+diff);     
 		}
-		*/	
-		SEL sel1 = new SEL("Entrada//03_4x4_Normal.in");
-		if(sel1.resolver());
+		
+		/*if(sel1.resolver())
 			sel1.cotaDeError();
-		System.out.println(sel1);
-		sel1.guardar("Respuesta.out");
+		sel1.guardar("Respuesta.out");*/
 	}
 }

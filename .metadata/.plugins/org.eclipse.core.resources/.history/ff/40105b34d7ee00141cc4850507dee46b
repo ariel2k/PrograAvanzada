@@ -195,13 +195,12 @@ public class MatrizMath implements Cloneable{
 	} 
 
 	public int intercambiarCero(int fila) {
-		int i=fila+1;
+		int i=fila;
 		while(i<this.fila){
 			if(this.mat[i][fila] != 0){
 				this.intercambiar(i, fila);
 				return i;
 			}	
-			i++;
 		}
 		return 0;
 	}
