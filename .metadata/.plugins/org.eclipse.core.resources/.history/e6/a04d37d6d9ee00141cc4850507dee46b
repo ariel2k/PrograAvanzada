@@ -140,6 +140,27 @@ public class MatrizMath implements Cloneable{
 		return cad;
 	}
 	
+	public MatrizMath subMatriz(int filaASacar, int columnaASacar) {
+		int dim = this.fila-1;
+		MatrizMath m = new MatrizMath (dim, dim); 
+		int	fila=0,
+			colum=0,
+			bandera;
+		for(int i=0; i<this.fila; i++) {
+			bandera =0;
+			for(int j=0; j<this.fila; j++)
+				if(i != filaASacar && j!= columnaASacar) {
+					m.mat[fila][colum] = this.mat[i][j];
+					colum++;
+					bandera=1;
+				}
+			if(bandera == 1)
+				fila++;
+			colum=0;		
+		}
+		return m;
+	}
+	
 	public double determinante() throws DistDimException {
 		  if (this.columna != this.fila)
 		   throw new DistDimException(" No es una matriz cuadrada ");
@@ -194,6 +215,11 @@ public class MatrizMath implements Cloneable{
 			this.mat[filaOrigen][i] = aux;
 		}
 	}
+
+	public void sumarFilas(int filaOrigen, int filaDestino) {
+		for(int i=0; i<this.fila; i++)
+			this.mat[filaDestino][i] += this.mat[filaOrigen][i];
+	}
 	
 	public void sumarFilas(double n, int filaDestino) {
 		for(int i=0; i<this.fila; i++)
@@ -205,6 +231,25 @@ public class MatrizMath implements Cloneable{
 			this.mat[filaDestino][i] += this.mat[filaOrigen][i]*n;	
 	}
 
+	public void restarFilas(int filaOrigen, int filaDestino) {
+		for(int i=0; i<this.fila; i++)
+			this.mat[filaDestino][i] -= this.mat[filaOrigen][i];
+	}
+
+	public void multiplicarFilas(int filaOrigen, int filaDestino) {
+		for(int i=0; i<this.fila; i++)
+			this.mat[filaDestino][i] *= this.mat[filaOrigen][i];
+	}
+
+	public void multiplicarFilas(double n, int filaDestino) {
+		for(int i=0; i<this.fila; i++)
+			this.mat[filaDestino][i] *= n;
+	}
+
+	public void dividirFilas(int filaOrigen, int filaDestino) {
+		for(int i=0; i<this.fila; i++)
+			this.mat[filaDestino][i] /= this.mat[filaOrigen][i];
+	}
 
 	public void dividirFilas(double n, int filaDestino) {
 		for(int i=0; i<this.fila; i++)
