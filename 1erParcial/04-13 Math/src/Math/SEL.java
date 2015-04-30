@@ -1,5 +1,8 @@
 package Math;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
 public class SEL {
 	
 	private VectorMath b;
@@ -44,16 +47,17 @@ public class SEL {
 		b.setVec(auxB);
 	}
 	
-	public void resolver() {
+	public boolean resolver() {
 		aInv =  a.inversa();
-		if (aInv == null)
+		if (aInv == null){
 			this.datosSolucion = "0";
-		else {
-			this.x = aInv.producto(this.b);
-			this.datosSolucion += "" + this.x.getVec().length +"\n";
-			for(int i = 1; i < this.x.getVec().length + 1; i++)
-				this.datosSolucion += "" + this.x.getVec()[i-1] +"\n";
-		}
+			return false;
+		}			
+		this.x = aInv.producto(this.b);
+		this.datosSolucion += "" + this.x.getVec().length +"\n";
+		for(int i = 1; i < this.x.getVec().length + 1; i++)
+			this.datosSolucion += "" + this.x.getVec()[i-1] +"\n";
+		return true;		
 	}
 	
 	public void guardar(String ruta) {
@@ -80,9 +84,41 @@ public class SEL {
 	}
 	
 	public static void main(String[] args) {
-		SEL sel1 = new SEL("SEL_3.in");
-		sel1.resolver();
-		sel1.cotaDeError();
-		sel1.guardar("Respuesta.out");
+		String[] archivosIn = {"3",
+							   "5",
+							   "10",
+							   "20",
+							   "50",
+							   "100",
+							   "150",
+							   "200",
+							   "250",
+							   "300",
+							   "500",
+							   "800",
+							   "1000",
+		};
+		
+		for (int i = 0; i < archivosIn.length; i++) {	
+			SEL sel = new SEL("SEL_"+archivosIn[i]+"_Int.in");
+			Calendar tIni = new GregorianCalendar();
+			sel.resolver();
+			Calendar tFin = new GregorianCalendar();
+			double diff = tFin.getTimeInMillis() - tIni.getTimeInMillis();
+			System.out.println(archivosIn[i]+"_Int: "+diff);     
+		}
+		
+		for (int i = 0; i < archivosIn.length; i++) {			
+			SEL sel = new SEL("SEL_"+archivosIn[i]+"_Long.in");
+			Calendar tIni = new GregorianCalendar();
+			sel.resolver();
+			Calendar tFin = new GregorianCalendar();
+			double diff = tFin.getTimeInMillis() - tIni.getTimeInMillis();
+			System.out.println(archivosIn[i]+"_Long: "+diff);     
+		}
+		
+		/*if(sel1.resolver())
+			sel1.cotaDeError();
+		sel1.guardar("Respuesta.out");*/
 	}
 }
