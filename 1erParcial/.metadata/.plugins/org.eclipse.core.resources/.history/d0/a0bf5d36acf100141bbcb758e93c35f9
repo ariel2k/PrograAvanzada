@@ -1,0 +1,13 @@
+package orquestaPack;
+
+public class Viento extends Instrumento{
+	
+	public Viento(String nombre){
+		this.nombre = new String(nombre);
+	}
+	
+	public void tocar() {
+		System.out.println("Tocó Viento "+this.nombre);
+	}
+
+}
